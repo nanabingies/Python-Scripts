@@ -33,6 +33,16 @@ class List:
         _last.next = node
         return
     
+    def insertFront(self, data: int) -> None:
+        node: Node = Node(data, None)
+        
+        if self.head is None:
+            self.head = node
+            return
+        
+        node.next = self.head
+        self.head = node
+    
     def remove(self, data: int) -> bool:
         if self.head is None:
             print('Cant find node with value ', data, ' in the list')
@@ -96,6 +106,7 @@ if __name__ == "__main__":
     linkd.remove(1)
     print(linkd)
     linkd.insert(2)
+    linkd.insertFront(1)
     linkd.insert(10)
     linkd.insert(15)
     linkd.insert(4)
