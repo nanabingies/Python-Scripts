@@ -36,6 +36,17 @@ class DoubleList:
         _last.next = node
         node.prev = _last
         return
+    
+    def deleteNum(self, data: int) -> None:
+        _temp: Node
+
+        if self.head is None:
+            return
+        
+        if self.head.next is None:
+            if self.head.data == data:
+                self.head = None
+                return
 
     def __str__(self) -> str:
         strng: str = ""
@@ -59,6 +70,8 @@ class DoubleList:
 if __name__ == "__main__":
     double = DoubleList()
     double.insert(1)
+    double.deleteNum(1)
+    print(double)
     double.insert(4)
     double.insert(8)
     double.insert(7)
