@@ -15,7 +15,17 @@ class DoubleList:
     def __init__(self) -> None:
         self.head = None
 
-    def insert(self, data: int) -> None:
+    def insertFirst(self, data: int) -> None:
+        node = Node(data, None, None)
+        if self.head is None:
+            return
+        
+        node.next = self.head
+        self.head.prev = node
+        self.head = node
+        return
+
+    def insertNum(self, data: int) -> None:
         node: Node = Node(data, None, None)
 
         if self.head is None:
@@ -46,7 +56,10 @@ class DoubleList:
             self.head = None
             return
         
-        _temp: Node = self.head
+        _temp: Node = self.head.next
+        _temp.prev = None
+        self.head = _temp
+        return
     
     def deleteNum(self, data: int) -> None:
         _temp: Node
@@ -58,6 +71,22 @@ class DoubleList:
             if self.head.data == data:
                 self.head = None
                 return
+            
+    def deleteLast(self) -> None:
+        if self.head is None:
+            return
+        
+        if self.head.next is None:
+            self.head = None
+            return
+        
+        _last: Node = self.head
+        while _last.next is not None:
+            _last = _last.next 
+        
+        _temp = _last.prev
+        _temp.next = None
+        return
 
     def __str__(self) -> str:
         strng: str = ""
@@ -80,11 +109,18 @@ class DoubleList:
         
 if __name__ == "__main__":
     double = DoubleList()
-    double.insert(1)
-    double.insert(4)
-    double.insert(8)
-    double.insert(7)
+    double.insertNum(1)
+    double.insertNum(4)
+    double.insertNum(8)
+    double.insertNum(7)
     print(double)
 
     double.deleteFirst()
+    print(double)
+
+    double.deleteLast()
+    print(double)
+
+    double.insertFirst(10)
+    double.insertFirst(14)
     print(double)
