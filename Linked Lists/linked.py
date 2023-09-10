@@ -93,10 +93,11 @@ class List:
         
         _temp = self.head
         while _temp is not None:        # Look for way to concatenate the strings
-            print(_temp.data, end=" -> ")
+            #print(_temp.data, end=" -> ")
+            strng += (str(_temp.data) + " -> ")
             _temp = _temp.next
-        print("NULL")
-
+        
+        strng += "NULL"
         return strng
 
     
