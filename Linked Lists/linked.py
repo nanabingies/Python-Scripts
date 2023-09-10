@@ -1,3 +1,4 @@
+
 # My linked list implementation
 
 from dataclasses import dataclass
