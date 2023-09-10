@@ -85,6 +85,31 @@ class BinarySearchTreeNode:
             else:
                 return False
             
+    def delete(self, value: int):
+        if value < self.root:
+            if self.left:
+                self.left = self.left.delete(value)
+
+        elif value > self.root:
+            if self.right:
+                self.right = self.right.delete(value)
+
+        else:
+            if self.left is None and self.right is None:
+                return None
+            
+            if self.left is None:
+                return self.right
+            
+            if self.right is None:
+                return self.left
+            
+            min_val = self.right.find_min()
+            self.root = min_val
+            self.right = self.right.delete(min_val)
+
+        return self
+            
     # The following methods are exercises implemented by ME
     def find_min(self) -> int:
         if self.root is None:
@@ -126,3 +151,6 @@ if __name__ == "__main__":
 
     print(root.find_min())
     print(root.find_max())
+
+    root.delete(20)
+    print(root.traverse_inorder())
