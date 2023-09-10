@@ -42,6 +42,33 @@ class BinarySearchTreeNode:
 
         return elements
     
+    def traverse_preorder(self) -> list[int]:
+        # For preorder traversal we first visit the root node, then the left tree node, then right tree node
+        elements: list[int] = []
+
+        if self.root:
+            elements.append(self.root)
+
+        if self.left:
+            elements += self.left.traverse_preorder()
+
+        if self.right:
+            elements += self.right.traverse_preorder()
+
+        return elements
+    
+    def traverse_postorder(self) -> list[int]:
+        # For postorder traversal we first visit the left tree node, then right tree node, and finally the root node
+        elements: list[int] = []
+
+        if self.left:
+            elements += self.left.traverse_postorder()
+        if self.right:
+            elements += self.right.traverse_postorder()
+        elements.append(self.root)
+
+        return elements
+    
     def search(self, value: int) -> bool:
         if self.root == value:
             return True
@@ -79,9 +106,6 @@ class BinarySearchTreeNode:
         if self.right:
             return self.right.find_max()
         
-    def calculate_sum(self) -> int:
-        if self.root is None:
-            return 0
     
 
 def buildTree(elements: list[int]) -> BinarySearchTreeNode:
@@ -96,6 +120,8 @@ if __name__ == "__main__":
     elements: list = [17, 4, 1, 20, 9, 23, 18, 34, 18, 4]
     root: BinarySearchTreeNode = buildTree(elements)
     print(root.traverse_inorder())
+    print(root.traverse_preorder())
+    print(root.traverse_postorder())
     print(root.search(27))
 
     print(root.find_min())
