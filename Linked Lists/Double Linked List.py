@@ -28,6 +28,14 @@ class DoubleList:
             return
         
         # Handle multiple cases
+        _last: Node = self.head
+        while _last.next is not None:
+            _last = _last.next
+        
+        # we're now at last
+        _last.next = node
+        node.prev = _last
+        return
 
     def __str__(self) -> str:
         strng: str = ""
@@ -36,9 +44,22 @@ class DoubleList:
             return strng
         
         if self.head.next is None:
-            return str(self.head.data) + " -> NULL"
+            strng += (str(self.head.data) + " -> NULL")
+            return strng
+        
+        _temp: Node = self.head
+        while _temp is not None:
+            strng += (str(_temp.data) + " -> ")
+            _temp = _temp.next 
+
+        strng += "NULL"
+        return strng
+
         
 if __name__ == "__main__":
     double = DoubleList()
     double.insert(1)
+    double.insert(4)
+    double.insert(8)
+    double.insert(7)
     print(double)
