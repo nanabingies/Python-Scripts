@@ -47,6 +47,20 @@ class DoubleList:
         node.prev = _last
         return
     
+    def insertLast(self, data: int) -> None:
+        node = Node(data, None, None)
+        
+        if self.head is None:
+            return
+        
+        _last: Node = self.head
+        while _last.next is not None:
+            _last = _last.next 
+        
+        _last.next = node
+        node.prev = _last
+        return
+    
     def deleteFirst(self) -> None:
         if self.head is None:
             return
@@ -123,4 +137,7 @@ if __name__ == "__main__":
 
     double.insertFirst(10)
     double.insertFirst(14)
+    print(double)
+
+    double.insertLast(22)
     print(double)
