@@ -16,6 +16,13 @@ class TreeNode:
         child.parent = self
         self.children.append(child)
 
+    def print_tree(self) -> None:
+        print(self.data)
+        if self.children:
+            for child in self.children:
+                child.print_tree()
+
+
 def build_product_tree() -> TreeNode:
     root = TreeNode("Electronics")
 
@@ -41,4 +48,4 @@ def build_product_tree() -> TreeNode:
 
 if __name__ == "__main__":
     root = build_product_tree()
-    print(root)
+    root.print_tree()
