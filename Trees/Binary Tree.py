@@ -1,0 +1,57 @@
+# Binary Search Tree Implementation
+
+class BinarySearchTreeNode:
+    data: int       # root node
+    left: None      # left node
+    right: None     # right node
+
+    def __init__(self, data: int) -> None:
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def add_child(self, data: int) -> None:
+        if self.data == data:   # Duplicates aren't allowed
+            return
+        
+        if data < self.data:
+            # Add data in left tree node
+            if self.left:
+                self.left.add_child(data)
+            else:
+                self.left = BinarySearchTreeNode(data)
+
+        else:
+            # Add data in right tree node
+            if self.right:
+                self.right.add_child(data)
+            else:
+                self.right = BinarySearchTreeNode(data)
+
+    def traverse_inorder(self) -> list[int]:
+        # For inorder traversal we first visit left tree node, then parent node, then right tree node
+        elements: list[int] = []
+        
+        if self.left:
+            elements += self.left.traverse_inorder()
+        
+        elements.append(self.data)
+
+        if self.right:
+            elements += self.right.traverse_inorder()
+
+        return elements
+    
+
+def buildTree(elements: list[int]) -> BinarySearchTreeNode:
+    root = BinarySearchTreeNode(elements[0])
+
+    for i in range(1, len(elements)):
+        root.add_child(elements[i])
+
+    return root
+
+if __name__ == "__main__":
+    elements: list = [17, 4, 1, 20, 9, 23, 18, 34, 18, 4]
+    root: BinarySearchTreeNode = buildTree(elements)
+    print(root.traverse_inorder())
