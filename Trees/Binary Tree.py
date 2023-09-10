@@ -63,14 +63,25 @@ class BinarySearchTreeNode:
         if self.root is None:
             return
         
-        if self.left is None and self.right is None:
-            return self.root
-        
-        if self.left is None and self.right:
+        if self.left is None:
             return self.root
         
         if self.left:
             return self.left.find_min()
+        
+    def find_max(self) -> int:
+        if self.root is None:
+            return
+        
+        if self.right is None:
+            return self.root
+        
+        if self.right:
+            return self.right.find_max()
+        
+    def calculate_sum(self) -> int:
+        if self.root is None:
+            return 0
     
 
 def buildTree(elements: list[int]) -> BinarySearchTreeNode:
@@ -88,3 +99,4 @@ if __name__ == "__main__":
     print(root.search(27))
 
     print(root.find_min())
+    print(root.find_max())
