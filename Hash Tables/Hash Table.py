@@ -13,15 +13,24 @@ class HashTable:
             h += ord(char)
         return h % self.MAX
     
-    def add(self, key, val):
+    def __setitem__(self, key: Any, val: int) -> None:
         h = self.get_hash(key)
         self.arr[h] = val
 
-    def get(self, key: Any):
+    def __getitem__(self, key: Any) -> int:
         h = self.get_hash(key)
         return self.arr[h]
     
+    def __delitem__(self, key: Any) -> None:
+        h = self.get_hash(key)
+        self.arr[h] = None
+    
 if __name__ == "__main__":
     hash = HashTable()
-    hash.add('March 6', 130)
-    print(hash.get('March 6'))
+    hash['March 6'] = 130
+    print(hash['March 6'])
+
+    hash['March 1'] = 20
+    hash['December 27'] = 27
+    del hash['March 1']
+    print(hash['March 1'])
