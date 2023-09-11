@@ -130,8 +130,56 @@ class Graph(object):
         res = "vertices: "
         for k in self._graph_dict:
             res += str(k) + " "
-        res += "\nedges"
+        res += "\nedges: "
         for edge in self.__generate_edges():
             res += str(edge)
 
         return res
+    
+
+g = { "a" : {"d"},
+      "b" : {"c"},
+      "c" : {"b", "c", "d", "e"},
+      "d" : {"a", "c"},
+      "e" : {"c"},
+      "f" : {}
+    }
+
+graph = Graph(g)
+for vertice in graph:
+    print(f"Edges of vertice {vertice}: ", graph.edges(vertice))
+
+graph.add_edge({"ab", "fg"})
+graph.add_edge({"xyz", "bla"})
+print("")
+print("Vertices of graph:")
+print(graph.all_vertices())
+
+print("Edges of graph:")
+print(graph.all_edges())
+
+print("")
+print("Vertices of graph:")
+print(graph.all_vertices())
+
+print("Edges of graph:")
+print(graph.all_edges())
+
+print("Add vertex:")
+graph.add_vertex("z")
+
+print("Add an edge:")
+graph.add_edge({"a", "d"})
+
+print("Vertices of graph:")
+print(graph.all_vertices())
+
+print("Edges of graph:")
+print(graph.all_edges())
+
+print('Adding an edge {"x","y"} with new vertices:')
+graph.add_edge({"x","y"})
+print("Vertices of graph:")
+print(graph.all_vertices())
+print("Edges of graph:")
+print(graph.all_edges())
