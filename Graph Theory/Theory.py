@@ -22,4 +22,27 @@ graph = {
     'f': {}
 }
 
-print(graph)
+from typing import TypeVar
+T = TypeVar("T")
+
+# Function to generate a list of all edges in the graph
+def generate_edges(graph: set[T]) -> list[T]:
+    edges: list[T] = []
+    for node in graph:
+        for neighbor in graph[node]:
+            edges.append({node, neighbor})
+    
+    return edges
+
+# Calculate numebr of isolated nodes in a given graph
+def find_isolated_nodes(graph: set[T]) -> set:
+    isolated = set()
+    for node in graph:
+        if not graph[node]:
+            isolated.add(node)
+    
+    return isolated
+
+
+print(generate_edges(graph))
+print(find_isolated_nodes(graph))
