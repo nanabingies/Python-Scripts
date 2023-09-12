@@ -7,3 +7,4 @@
 2. All the leaf elements must lean towards the left.
 3. The last element might not have a right sibling
 ie. a complete binary tree doesn't have to be a full binary tree.
+
