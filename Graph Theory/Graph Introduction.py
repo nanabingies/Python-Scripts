@@ -36,6 +36,25 @@ class Graph:
                     all_paths.append(p)
         
         return all_paths
+    
+    def get_shortest_path(self, start: T, end: T, path: list = []) -> list:
+        path = path + [start]
+
+        if start == end:
+            return path
+        
+        if start not in self._graph_dict:
+            return None
+        
+        shortest_path = None
+        for node in self._graph_dict[start]:
+            if node not in path:
+                sp = self.get_shortest_path(node, end, path)
+                if sp:
+                    if shortest_path is None or len(sp) < len(shortest_path):
+                        shortest_path = sp
+        
+        return shortest_path
 
 if __name__ == "__main__":
     routes = [
