@@ -45,6 +45,7 @@ class Graph(object):
     def add_edge(self, edge: T) -> None:
         """ assumes that edge is of type set, tuple or list; 
             between two vertices can be multiple edges! 
+            Append edges to a vertex
         """
         edge = set(edge)
         vertex1, vertex2 = tuple(edge)
