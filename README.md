@@ -1,2 +1,2 @@
 # Python Scripts
- Collection of Python scripts. Mostly DTA related.
+ Collection of Python scripts. Mostly DSA related.
