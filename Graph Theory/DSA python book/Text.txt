@@ -1,0 +1,9 @@
+# Some Theory on graphs from the book
+
+Algorithm DFS(G, u):            { We assume u has already been marked as visited }
+    Input: A graph G and a vertex u of G 
+    Output: A collection of vertices reachable from u, with their discovery edges
+    for each outgoing edge e=(u, v) of u do 
+        if vertex v has not been visited then
+            Mark vertex v as visited (via edge e)
+            Recursively call DFS(G, v)
