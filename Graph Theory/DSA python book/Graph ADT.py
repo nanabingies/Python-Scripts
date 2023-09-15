@@ -112,7 +112,3 @@ class Graph():
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
 
-
-if __name__ == "__main__":
-    graph = Graph()
-    print(graph)
