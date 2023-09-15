@@ -25,7 +25,7 @@ class Edge:
     """ Lightweight edge structure for a graph """
     __slots__ = '_origin', '_destination', '_element'
 
-    def __init__(self, u, v, x) -> None:
+    def __init__(self, u: T, v: T, x: Vertex) -> None:
         """ Do not call constructor directly. Use Graph's insert_edge(u,v,x) """
         self._origin = u
         self._destination = v
@@ -57,4 +57,29 @@ class Graph:
 
     def is_directed(self):
         """ Return True if this is a directed graph """
-        
+        return self._incoming is not self._outgoing     # directed if maps are distinct
+    
+    def vertex_count(self) -> int:
+        """ Return the number of vertices in the graph """
+        return len(self._outgoing)
+    
+    def vertices(self) -> iter:
+        """ Return an iteration of all vertices of the graph """
+        return self._outgoing.keys()
+    
+    def edge_count(self) -> int:
+        """ Return the number of edges in the graph """
+        total = sum(len(self._outgoing[v]) for v in self._outgoing)
+        # for undirected graphs, make sure not to double-count edges
+        return total if self.is_directed() else total // 2
+    
+    def edges(self) -> set:
+        """ Return a set of all edges of the graph """
+        result = set()
+        for secondary_map in self._outgoing.values():
+            result.update(secondary_map.values())
+        return result
+    
+    def get_edge(self, u, v) -> T:
+        """ Return the edge from u to v, or None if not adjacent """
+        return self._outgoing[u].get(v)
