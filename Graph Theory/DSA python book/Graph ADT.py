@@ -35,7 +35,7 @@ class Edge:
         """ Return (u,v) tuple for vertices u and v """
         return (self._origin, self._destination)
     
-    def opposite(self, v) -> Vertex:
+    def opposite(self, v: T) -> Vertex:
         """ Returns the vertex that is opposite v on this edge """
         return self._destination if v is self._origin else self._origin
     
@@ -80,6 +80,6 @@ class Graph:
             result.update(secondary_map.values())
         return result
     
-    def get_edge(self, u, v) -> T:
+    def get_edge(self, u: T, v: T) -> T:
         """ Return the edge from u to v, or None if not adjacent """
         return self._outgoing[u].get(v)
