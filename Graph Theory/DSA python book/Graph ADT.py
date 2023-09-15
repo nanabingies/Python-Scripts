@@ -47,7 +47,7 @@ class Edge:
         return hash((self._origin, self._destination))
     
 
-class Graph:
+class Graph():
     """ Representation of a simple graph using an adjacency map """
 
     def __init__(self, directed: bool = False) -> None:
@@ -83,3 +83,36 @@ class Graph:
     def get_edge(self, u: T, v: T) -> T:
         """ Return the edge from u to v, or None if not adjacent """
         return self._outgoing[u].get(v)
+    
+    def degree(self, v: Vertex, outgoing: bool = True) -> int:
+        """ Return number of (outgoing) edges incident to vertex v in the graph """
+        adj = self._outgoing if outgoing else self._incoming
+        return len(adj[v])
+    
+    def incident_edges(self, v: Vertex, outgoing = True) -> Edge:
+        """
+            Return number of (outgoing) edges incident to vertex v in the graph
+            If graph is directed, optional parameter used to request incoming edges
+        """
+        adj: dict = self._outgoing if outgoing else self._incoming
+        for edge in adj[v].values():
+            yield edge
+
+    def insert_vertex(self, x: Vertex = None) -> Vertex:
+        """ Insert and return a new Vertex with element x """
+        v = self.Vertex(x)
+        self._outgoing[v] = {}
+        if self.is_directed():
+            self._incoming[v] = {}
+        return v
+    
+    def insert_edge(self, u, v, x = None) -> None:
+        """ Insert and return a new Edge from u to v with auxiliary element x """
+        e = self.Edge(u, v, x)
+        self._outgoing[u][v] = e
+        self._incoming[v][u] = e
+
+
+if __name__ == "__main__":
+    graph = Graph()
+    print(graph)
