@@ -14,12 +14,11 @@ graph = {
 
 
 def DFS(visited: set, graph:dict, startNode: T):
-    for startNode in graph:
-        if startNode not in visited:
-            print(startNode)
-            visited.add(startNode)
-            for neighbor in graph[startNode]:
-                DFS(visited, graph, neighbor)
+    if startNode not in visited:
+        print(startNode)
+        visited.add(startNode)
+        for neighbor in graph[startNode]:
+            DFS(visited, graph, neighbor)
 
 if __name__ == "__main__":
     visited = set()
